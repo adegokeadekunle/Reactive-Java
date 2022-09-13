@@ -1,0 +1,73 @@
+
+                                        FEATURES OF REACTIVE PROGRAMMING
+    1. New programming paradigm
+    2. Asynchronous and non-blocking -> unlike the traditional programming style where it is a blocking style in which
+                                        a thread sends a request and wait for response to return to the client. reactive
+                                        programming provides Asynchronous and non-blocking style where a request is received
+                                        by a SUBSCRIBER and sent to a PUBLISHER to process. once this request is sent to
+                                        the publisher, the subscriber will not wait for the response but will rather go
+                                        for another request from the client. once the publisher completes the request,
+                                        it sends it to the available thread (subscriber) which in turn return a response
+                                        to the client.
+
+    3. Functional style code - > uses java 8 functional style of programming using lambdas and functional interfaces.
+
+    4. Data flow as event driven stream -> The publisher send message if there are changes or update in the application
+                                           as it happens. example is livescore.com where you get  live updates of scores
+                                           from matches has it happens.
+
+
+    5. Backpressure on the data stream -> helps to handle large data in a situation where an application cannot
+                                          handle the amount of data from the db. it reduces the load to suit the
+                                          capacity of the application. and prevent the application from crashing with
+                                          outOfMemoryError.
+
+                                REACTIVE PROGRAMMING SPECIFICATION
+    1. Publisher ->  also known as producer is a datasource who will always publish an event.
+                     publish an event (database driver).
+                     published has one method known as subscribe.
+                     method signature : subscribe(Subscriber <? super T > s)
+
+    2. Subscriber -> also known as consumer. subscriber consumes or subscribe  the event from publisher
+                    subscribe to n event (backend app / browser ).
+                    it has 4 methods :
+                                         1. onSubscribe(Subscription s)
+                                         2. onNext(T t)  -> the call is made when there are several event to be handled.
+                                            if there are 10 events , there will be 10 onNext calls
+                                         3. onError(Throwable t)  -> it is called when there is an error
+                                         4. onComplete()  -> if there is no error, the onComplete() is called to
+                                            complete the transaction
+
+    3. Subscription -> this represents the unique relationship between a subscriber and a publisher.
+                       the subscription has 2 methods :
+                                         1. request(long n)  -> to get details from the publisher
+                                         2. cancel()  ->
+
+    4. Processor -> The processor represents a processing stage which is both a subscriber and a publisher and
+                    must obey the contracts of both
+                    method signature : public interface Processor<T,R> extends Subscriber<T> , Publisher<R>{}
+
+                                        WORK FLOW OF REACTIVE STREAM
+                    1. subscriber will invoke subscribe method of publisher and pass the instance of subscribe as input
+                    2. publisher will check in the subscription to confirm that the subscription is successful
+                    3. subscriber will call request method from subscription interface to get the data from publisher
+                    4. publisher will send data stream to subscriber by invoking onNext()  NB-> onNext() will be called as many times as the data required.
+                    5. depending on the result. publisher will invoke onComplete() if it is successful or onError() if there is an error.
+
+                                           REACTIVE PROGRAMMING LIBRARIES
+                    1. Reactor
+                    2. RxJava
+                    3. JDK9 flow reactive stream
+
+    NOTE : In stream, if a call is cancelled , the execution is terminated on the backend but in case of a traditional
+           REST. the program completes the execution.
+
+                                    FUNCTIONAL ENDPOINTS AND REST API
+        In functional endpoints , we send request from the controller to the handler that will handle the request.
+        While in REST Api we send request from the controller to the service layer that will handle the request.
+
+
+
+
+
+
