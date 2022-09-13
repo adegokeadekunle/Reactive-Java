@@ -20,6 +20,5 @@ public class CustomerHandler {
        Flux<Customer> customerList = customerDao.getAllCustomerList();
        return ServerResponse.ok().body(customerList,Customer.class);
 
-
     }
 }

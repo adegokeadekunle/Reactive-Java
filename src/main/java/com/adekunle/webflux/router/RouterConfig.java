@@ -23,7 +23,9 @@ public class RouterConfig {
     public RouterFunction<ServerResponse> routerFunction(){
         return (RouterFunction<ServerResponse>) RouterFunctions.route()
                 .GET("/router/customer",handler::loadAllCustomer)
-                .GET("/router/customerstream", streamHandler::loadAllCustomerStream)
+                .GET("/router/customerStream", streamHandler::loadAllCustomerStream)
+                .GET("/router/customerpathvarible/{input}",streamHandler::getCustomerById)
+                .POST("/router/postcustomer",streamHandler::saveCustomer)
                 .build();
     }
 }
